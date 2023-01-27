@@ -1,0 +1,32 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+
+    text-align: center;
+}
+
+.container div{
+    line-height: 1.1 !important;
+}
+
+.container h1 {
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.container div, .container h1, ul{
+    opacity: 0;
+}
+
+a{
+    text-decoration: none;
+}

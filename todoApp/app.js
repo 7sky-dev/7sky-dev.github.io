@@ -5,14 +5,14 @@ function add(){
             
         }else{
             task = document.createTextNode(task);
+            let task_div = document.createElement("div");
         
 
                 let newTask = document.createElement("div");
-                newTask.className = "d-flex flex-row";
+                newTask.className = "d-flex flex-row justify-content-center align-items-center";
 
-        
-    
-                newTask.appendChild(task);
+                task_div.appendChild(task);
+                newTask.appendChild(task_div);
 
 
                 let identificator = new Date();
@@ -28,6 +28,10 @@ function add(){
                 let button = document.createElement("button");
                 button.className = "btn btn-danger";
                 button.appendChild(document.createTextNode("X"));
+                button.className = "btn btn-danger dismiss";
+                button.value=identificator;
+
+                button_div.className = "ms-auto";
 
                 button_div.appendChild(button);
                 newTask.appendChild(button_div);

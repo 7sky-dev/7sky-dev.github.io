@@ -22,17 +22,31 @@
 </head>
 <body>
     <div class="container p-3">
+
+        
+        
         <div class="todo container-md d-flex flex-column justify-content-center align-items-center">
+
             <div class="add">
                 <div class="input-group mb-3">
-                    <input id="task_name" type="text" class="form-control" placeholder="Enter a task" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" type="button" id="button-addon2" onclick="add()">Add</button>
+                    <input id="task_name" type="text" class="form-control" placeholder="Enter a task" aria-describedby="button-addon2">
+                    <button id="add_button" class="btn btn-primary" type="button">Add</button>
                   </div>
             </div>
-            <div class="list container-md p-3 text-light d-flex flex-column">
+            <div class="list container-md p-3 text-light d-flex flex-column mb-3">
                 
             </div>
+
         </div>
+        
     </div>
+    <script>
+
+
+        $("#add_button").click(function(){
+            let string = document.querySelector("#task_name").value;
+            add_task(string,"0");
+        });
+    </script>
 </body>
 </html>

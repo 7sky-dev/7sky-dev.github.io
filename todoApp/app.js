@@ -1,47 +1,113 @@
-function add(){
-    // task
-        let task = document.querySelector("#task_name").value;
+let task;
+let tasks = [];
+let saved_tasks;
+let identificator;
+    
+function check(){
+    if(tasks.length==0){
+        document.querySelector(".list").style.backgroundColor="white";
+    }
+    else{
+        document.querySelector(".list").style.backgroundColor="black";
+    }
+}
+
+
+    function add_task(task,id){
+
         if(task==""){
+            document.getElementById("task_name").style.backgroundColor="#DC3545";
+            document.getElementById("task_name").placeholder="Enter a valid task name!";
+            document.getElementById("task_name").classList.add("white");
+
+            setTimeout(() => {
+                document.getElementById("task_name").style.backgroundColor="white";
+                document.getElementById("task_name").placeholder="Enter a task";
+                document.getElementById("task_name").classList.remove("white");
+            }, 1500);
+        }else{
+
+            document.getElementById("task_name").style.backgroundColor="lightgreen";
+
+            setTimeout(() => {
+                document.getElementById("task_name").style.backgroundColor="white";
+            }, 1000);
+
+            
+
+            let task_div = document.createElement("div");
+            task_node = document.createTextNode(task);
+            task_div.appendChild(task_node);
+
+        let newTask = document.createElement("div");
+            newTask.className = "d-flex flex-row justify-content-center align-items-center p-2 m-1";
+            newTask.appendChild(task_div);
+
+        if(id=="0"){
+            identificator = new Date();
+            identificator = identificator.getTime();
             
         }else{
-            task = document.createTextNode(task);
-            let task_div = document.createElement("div");
-        
+            identificator = id;
+        }
 
-                let newTask = document.createElement("div");
-                newTask.className = "d-flex flex-row justify-content-center align-items-center";
-
-                task_div.appendChild(task);
-                newTask.appendChild(task_div);
+        newTask.id=identificator;
 
 
-                let identificator = new Date();
-                identificator = identificator.getTime();
+    // button
 
-                newTask.id=identificator;
+        let button_div = document.createElement("div");
+            button_div.className = "ms-auto";
 
-
-            // button
-
-            let button_div = document.createElement("div");
-
-                let button = document.createElement("button");
+            let button = document.createElement("button");
                 button.className = "btn btn-danger";
                 button.appendChild(document.createTextNode("X"));
-                button.className = "btn btn-danger dismiss";
+                button.className = "btn btn-danger";
                 button.value=identificator;
-
-                button_div.className = "ms-auto";
-
-                button_div.appendChild(button);
-                newTask.appendChild(button_div);
-
-
-            // adding task to the list
-                let taskOutput = document.querySelector(".list");
-                taskOutput.appendChild(newTask);
-
-            document.querySelector("#task_name").value="";
-        }
+                button.setAttribute("onclick", "del("+identificator+")");
         
-}
+            button_div.appendChild(button);
+            newTask.appendChild(button_div);
+
+        // adding task to the list
+            let taskOutput = document.querySelector(".list");
+            taskOutput.appendChild(newTask);
+
+        document.querySelector("#task_name").value="";
+        tasks.push([task.toString(),identificator]);
+
+        }
+        check();
+    }
+
+    function del(x){
+        for(let i=0; i<tasks.length; i++){
+            if(tasks[i][1]==x){
+                document.getElementById(""+x).remove();
+                tasks.splice(i, 1);
+            }
+        }
+        check();
+    }
+
+
+    window.onload = () => {
+        check();
+        saved_tasks = localStorage.getItem("saved_tasks");
+        saved_tasks = JSON.parse(saved_tasks);
+
+        saved_tasks.forEach(element => {
+            add_task(element[0],element[1]);
+        });
+
+        localStorage.clear();
+
+        console.log(saved_tasks);
+    };
+
+    window.onbeforeunload = () => {
+        saved_tasks = JSON.stringify(tasks);
+        localStorage.setItem("saved_tasks",saved_tasks);
+    };
+
+    

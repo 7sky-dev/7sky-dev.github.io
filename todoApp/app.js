@@ -8,7 +8,7 @@ function check(){
         document.querySelector(".list").style.backgroundColor="white";
     }
     else{
-        document.querySelector(".list").style.backgroundColor="black";
+        document.querySelector(".list").style.backgroundColor="#15374D";
     }
 }
 
@@ -28,9 +28,11 @@ function check(){
         }else{
 
             document.getElementById("task_name").style.backgroundColor="lightgreen";
+            document.getElementById("task_name").classList.add("black");
 
             setTimeout(() => {
                 document.getElementById("task_name").style.backgroundColor="white";
+                document.getElementById("task_name").classList.remove("black");
             }, 1000);
 
             

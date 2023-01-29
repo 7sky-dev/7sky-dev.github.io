@@ -5,7 +5,7 @@ let identificator;
     
 function check(){
     if(tasks.length==0){
-        document.querySelector(".list").style.backgroundColor="white";
+        document.querySelector(".list").style.backgroundColor="#6CB7E5";
     }
     else{
         document.querySelector(".list").style.backgroundColor="#15374D";
@@ -27,13 +27,16 @@ function check(){
             }, 1500);
         }else{
 
-            document.getElementById("task_name").style.backgroundColor="lightgreen";
-            document.getElementById("task_name").classList.add("black");
+            if(id==0){
+                document.getElementById("task_name").style.backgroundColor="lightgreen";
+                document.getElementById("task_name").classList.add("black");
 
-            setTimeout(() => {
-                document.getElementById("task_name").style.backgroundColor="white";
-                document.getElementById("task_name").classList.remove("black");
-            }, 1000);
+                setTimeout(() => {
+                    document.getElementById("task_name").style.backgroundColor="white";
+                    document.getElementById("task_name").classList.remove("black");
+                }, 1000);
+            }
+            
 
             
 

@@ -1,0 +1,29 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #578CB3;
+}
+
+.btn{
+    width: 100%;
+    background-color: #FFDF64;
+}
+
+.btn:hover{
+    background-color: #dabe51;
+}
+
+.alert{
+    background-color: #AA57FF;
+    border: 1px solid #7334B3;
+}
+
+.root{
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0;
+    padding: 0;
+}
+
+.calculator{
+    width: 50%;
+}

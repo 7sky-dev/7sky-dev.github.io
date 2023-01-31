@@ -27,6 +27,11 @@ body {
     opacity: 0;
 }
 
-a{
+.nav-link{
     text-decoration: none;
+    color: white !important;
+}
+
+.active{
+    color: black !important;
 }

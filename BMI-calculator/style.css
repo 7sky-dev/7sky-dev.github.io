@@ -12,11 +12,6 @@ body{
     background-color: #dabe51;
 }
 
-.alert{
-    background-color: #AA57FF;
-    border: 1px solid #7334B3;
-}
-
 .root{
     width: 100vw !important;
     height: 100vh !important;

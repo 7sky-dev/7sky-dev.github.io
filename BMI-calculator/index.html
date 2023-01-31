@@ -25,13 +25,14 @@
         <div class="calculator container-md d-flex flex-column justify-content-center align-items-center">
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">Weight:</span>
-                <input id="weight" type="number" class="form-control" placeholder="Enter your weight in kg" aria-label="Weight" aria-describedby="basic-addon1">
-              </div>
-              <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Height:</span>
                 <input id="height" type="number" class="form-control" placeholder="Enter your height in cm" aria-label="Height" aria-describedby="basic-addon1">
               </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Weight:</span>
+                <input id="weight" type="number" class="form-control" placeholder="Enter your weight in kg" aria-label="Weight" aria-describedby="basic-addon1">
+            </div>
 
               <button id="button_calculate" type="button" class="btn">Calculate</button>
 
@@ -47,6 +48,7 @@
         $("#result").hide();
 
         $("#button_calculate").click(function(){
+            $("#result").removeClass("bg-success");
             let weight = $("#weight").val();
             let height = $("#height").val();
             
@@ -54,10 +56,21 @@
             height = height*height;
 
             let bmi = weight/height;
-            bmi = Math.floor(bmi);
+            
+            if(bmi<18.5){
+                $("#result").css("backgroundColor","#B71C1C");
+            }else if(bmi>18.5 && bmi <25){
+                $("#result").addClass("bg-success");
+            }else if(bmi>25 && bmi<30){
+                $("#result").css("backgroundColor","#D32F2F");
+            }else if(bmi>30){
+                $("#result").css("backgroundColor","#B71C1C");
+            };
 
-            $("#result").html("Your BMI is equal to <b>"+bmi+"</b>");
+            $("#result").html("Your BMI is equal to <b>"+Math.round((bmi + Number.EPSILON) * 100) / 100+"</b>");
             $("#result").fadeIn();
+
+            bmi=0;
         });
     </script>
 

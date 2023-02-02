@@ -3,13 +3,13 @@ body{
     background-color: #578CB3;
 }
 
-.btn{
-    width: 100%;
-    background-color: #FFDF64;
+#phone_info{
+    display: none;
 }
 
-.btn:hover{
-    background-color: #dabe51;
+.btn{
+    width: 100%;
+    font-weight: bold;
 }
 
 .root{
@@ -21,4 +21,28 @@ body{
 
 .calculator{
     width: 50%;
+}
+
+.col{
+    border: 1px solid black;
+}
+
+.white{
+    color: white !important;
+}
+
+@media only screen and (max-width: 1400px) {
+    #info{
+        display: none;
+    }
+    #phone_info{
+        display: block;
+        margin: 10px;
+    }
+    .link{
+        padding: 5px;
+        border-radius: 10px;
+        background-color: black;
+        color: white;
+    }
 }

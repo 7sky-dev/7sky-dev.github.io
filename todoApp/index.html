@@ -41,12 +41,24 @@
         
     </div>
     <script>
-
-
-        $("#add_button").click(function(){
+        function press(){
             let string = document.querySelector("#task_name").value;
             add_task(string,"0");
+        };
+
+        $(document).on("keypress",(e) =>{
+            if(e.which == 13){
+                press();
+            }
         });
+
+        // $("#add_button").on("click",press());
+
+        let button = document.getElementById("add_button").addEventListener("click",() =>{
+            press();
+        });
+
+
     </script>
 </body>
 </html>

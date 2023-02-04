@@ -106,8 +106,7 @@ function check(){
         });
 
         localStorage.clear();
-
-        console.log(saved_tasks);
+        
     };
 
     window.onbeforeunload = () => {

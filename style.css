@@ -21,6 +21,7 @@ body {
 .container h1 {
     font-weight: bold;
     font-size: 3rem;
+    backdrop-filter: blur(10px);
 }
 
 .container div, .container h1, ul{
@@ -29,9 +30,20 @@ body {
 
 .nav-link{
     text-decoration: none;
-    color: white !important;
+    color: black !important;
 }
 
 .active{
     color: black !important;
+}
+
+body{
+    background-image: url(background.jpg);
+    background-size: cover;
+}
+
+.container div:nth-child(1){
+    border-radius: 10px;
+    box-shadow: 0px 0px 50px black;
+    backdrop-filter: blur(50px);
 }

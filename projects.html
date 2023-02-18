@@ -15,34 +15,35 @@
 
     <div class="div_nav container-xl">
       <nav class="nav">
-        <a class="nav-link hvr-underline-from-left" href="projects.html">PROJECTS</a>
+        <a class="nav-link hvr-underline-from-left" href="index.html">HOME</a>
         <a class="nav-link hvr-underline-from-left" href="mailto:7sky.js@gmail.com?subject=Business Contact">CONTACT</a>
       </nav>
     </div>
     <div class="cc div_face container-xl d-flex flex-row justify-content-center align-items-center">
 
       <div class="container-fluid">
-        <h1>I'm a</h1>
-        <h2>Full Stack Developer</h2>
-        <p class="up_p w60">I am at the beginning of my journey with commercial developement.
-          I'm very ambitious, systematic, hard-working and hungry for knowledge young developer, who wants to achieve their dreams as also be successful in his professional life.</p>
-          <p class="w60">I can easily leave my comfort zone and try something new.</p>
+        <div class="project up_p">
+            <h2 class="hvr-underline-from-left"> <a href="https://github.com/7sky-dev/Slideshow" style="text-decoration: none; color: #4D23F7;" target="_blank">Slideshow</a></h2>
+            <p class="w60">Lightweight slideshow webpage.</p>
+        </div>
 
-          <div class="row w40 w60">
-            <div class="col d-flex justify-content-center">
-              <button id="github" type="button" class="btn btn-lg px-4 gap-3 rounded-pill hvr-glow" style="background-color: #333;color: #fafafa">Github</button>
-            </div>
-            <div class="col d-flex justify-content-center">
-              <button id="discord" type="button" class="btn btn-lg px-4 rounded-pill hvr-glow" style="background-color: #5865F2; color: white;">Discord</button>
-            </div>
-          </div>
-          <div class="alert alert-success w40 w60 text-center text-bold" role="alert" style="margin-top: 50px;">
-            <b>Discord tag</b> successfully added to your clipboard !
-          </div>
+        <div class="project up_p">
+            <h2 class="hvr-underline-from-left"> <a href="https://7sky-dev.github.io/todoApp/index.html" style="text-decoration: none; color: #4D23F7;" target="_blank">Todo APP</a></h2>
+            <p class="w60">Online todo app, where you can write tasks and mark them as done. Everything is saved in localstorage.</p>
+        </div>
+
+        
+
+        <div class="project up_p">
+            <h2 class="hvr-underline-from-left"> <a href="https://7sky-dev.github.io/BMI-calculator/index.html" style="text-decoration: none; color: #4D23F7;" target="_blank">BMI Calculator</a></h2>
+            <p class="w60">Simple body mass index calculator.</p>
+        </div>
+        
+        
+
+          
       </div>
     </div>
-
-    
     
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -50,8 +51,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script>
-      $(document).ready(()=>{
-        $(".alert").hide();
+      $(document).ready(function(){
       $(".container div").animate({
           opacity: 1,
       }, 1000);
@@ -60,16 +60,9 @@
       }, 1000);
       });
 
-      $("#github").click(()=>{
-        window.open('https://github.com/7sky-dev', '_blank').focus();
-      })
-
-      $("#discord").click(()=>{
+      $("#discord").click(function(){
             navigator.clipboard.writeText('7sky#7829');
-            $(".alert").show();
-            setTimeout(() => {
-              $(".alert").hide();
-            }, 2000);
+            alert('Discord tag has been copied to your clipboard !');
         });
     </script>
   </body>

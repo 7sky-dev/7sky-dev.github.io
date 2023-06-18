@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>7sky</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Code+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="all">
+      <main class="container d-flex flex-column justify-content-center">
+        <div style="flex-basis: 90%" class="d-flex align-items-center">
+          <div class="mt-5">
+            <h1 class="animate__animated none pt-5 mr-2">👋</h1>
+            <br /><br /><br />
+          </div>
+          <div class="mt-5 text-right">
+            <h1
+              style="line-height: 0.8"
+              class="animate__animated animate__backInUp"
+            >
+              Hi, my name is <b>Piotr Kapeluszny</b>
+            </h1>
+            <h6
+              style="line-height: 1.2; color: #4672fe"
+              class="animate__animated none mt-2"
+            >
+              Check my projects below
+            </h6>
+          </div>
+        </div>
+        <div
+          style="flex-basis: 10%"
+          class="d-flex flex-column align-items-center justify-content-center"
+        >
+          <img
+            id="arrow"
+            src="arrow.svg"
+            alt="arrow"
+            class="animate__animated none"
+          />
+        </div>
+      </main>
+
+      <article class="d-flex justify-content-center align-items-center">
+        <span class="text-white mt-auto mb-4 ml-3">&DownArrow;</span>
+        <span class="ml-3" id="line"></span>
+        <span class="text-white mt-auto mb-4">&nbsp;contact</span>
+        <div class="container mt-5">
+          <div>
+            <div class="row text-center">
+              <div class="col rounded project">
+                <a data-toggle="modal" data-target="#weatherModal">
+                  <img
+                    src="https://raw.githubusercontent.com/7sky-dev/WeatherApp/main/weather.png"
+                    alt=""
+                    class="w-100 rounded"
+                  />
+                </a>
+              </div>
+              <div class="col rounded project">
+                <a data-toggle="modal" data-target="#todoModal">
+                  <img
+                    src="https://raw.githubusercontent.com/7sky-dev/TodoApp/main/todo.png"
+                    alt=""
+                    class="w-100 rounded"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col mt-4 rounded project">
+                <a data-toggle="modal" data-target="#stickyNotesModal">
+                  <img
+                    src="https://raw.githubusercontent.com/7sky-dev/StickyNotes/main/stickynotes.png"
+                    alt=""
+                    class="w-100 rounded"
+                  />
+                </a>
+              </div>
+              <div class="col mt-4 rounded project">
+                <a data-toggle="modal" data-target="#chatGPTModal">
+                  <img
+                    src="https://raw.githubusercontent.com/7sky-dev/ChatGPT-API-usage/main/overview.png"
+                    alt=""
+                    class="w-100 rounded"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="text-white mt-auto mb-4 mr-3">&nbsp;contact</span>
+        <span class="mr-3" id="line"></span>
+        <span class="text-white mt-auto mb-4 mr-3">&DownArrow;</span>
+      </article>
+
+      <footer>
+        <div
+          class="container p-4 pb-0 d-flex flex-column justify-content-center align-items-center"
+        >
+          <section>
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="mailto:7sky.js@gmail.com?subject=Business Contact"
+              role="button"
+              target="_blank"
+              ><i class="bi bi-google"></i
+            ></a>
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="https://github.com/7sky-dev"
+              role="button"
+              target="_blank"
+              ><i class="bi bi-github"></i
+            ></a>
+          </section>
+        </div>
+      </footer>
+    </div>
+    <div
+      class="modal fade"
+      id="weatherModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="weatherModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header">
+            <h4 class="modal-title" id="weatherModalLabel">
+              <b>WeatherApp</b>
+            </h4>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img
+              class="w-100 rounded mb-3"
+              src="https://raw.githubusercontent.com/7sky-dev/WeatherApp/main/weather.png"
+              alt=""
+            />
+            <p>
+              <span class="text-primary"><b>WeatherApp</b></span> is a web
+              application that retrieves weather data from the OpenWeatherMap
+              API and displays it in a user-friendly format.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a
+              href="https://github.com/7sky-dev/WeatherApp"
+              target="_blank"
+              class="btn btn-primary"
+              >Github</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="todoModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="todoModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header">
+            <h4 class="modal-title" id="todoModalLabel">
+              <b>TodoApp</b>
+            </h4>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img
+              class="w-100 rounded mb-3"
+              src="https://raw.githubusercontent.com/7sky-dev/TodoApp/main/todo.png"
+              alt=""
+            />
+            <p>
+              <span class="text-primary"><b>TodoApp</b></span> is a simple and
+              intuitive web application for creating and managing to-do
+              lists.<br />
+              Built with modern web technologies, including HTML, CSS,
+              JavaScript and Bootstrap.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a
+              href="https://github.com/7sky-dev/TodoApp"
+              target="_blank"
+              class="btn btn-primary"
+              >Github</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="stickyNotesModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="stickyNotesModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header">
+            <h4 class="modal-title" id="stickyNotesModalLabel">
+              <b>StickyNotes</b>
+            </h4>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img
+              class="w-100 rounded mb-3"
+              src="https://raw.githubusercontent.com/7sky-dev/StickyNotes/main/stickynotes.png"
+              alt=""
+            />
+            <p>
+              <span class="text-primary"><b>StickyNotes</b></span> is a
+              minimalist web app for creating and managing virtual sticky notes.
+              Built with modern web technologies, including HTML, CSS,
+              JavaScript, Bootstrap, and MongoDB.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a
+              href="https://github.com/7sky-dev/StickyNotes"
+              target="_blank"
+              class="btn btn-primary"
+              >Github</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="chatGPTModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="chatGPTModalLabel"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header">
+            <h4 class="modal-title" id="chatGPTModalLabel">
+              <b>ChatGPT Api Usage</b>
+            </h4>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img
+              class="w-100 rounded mb-3"
+              src="https://raw.githubusercontent.com/7sky-dev/ChatGPT-API-usage/main/overview.png"
+              alt=""
+            />
+            <p>
+              <span class="text-primary"><b>ChatGPT-API-usage</b></span> is a
+              project that showcases how to use the OpenAI GPT-3 language model
+              API to generate text responses. It includes a simple web app built
+              with HTML, CSS, and JavaScript, and utilizes the Bootstrap
+              framework for its responsive design.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a
+              href="https://github.com/7sky-dev/ChatGPT-API-usage"
+              target="_blank"
+              class="btn btn-primary"
+              >Github</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const arrow = document.querySelector("#arrow");
+      const main = document.querySelector("main");
+      const article = document.querySelector("article");
+      const h1 = document.querySelector("h1");
+      const h6 = document.querySelector("h6");
+
+      window.addEventListener("load", () => {
+        main.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          h1.classList.remove("none");
+          h1.classList.add("animate__fadeIn");
+          setTimeout(() => {
+            h1.classList.remove("animate__fadeIn");
+            h1.classList.add("animate__tada");
+          }, 500);
+        }, 1000);
+
+        setTimeout(() => {
+          setTimeout(() => {
+            setTimeout(() => {
+              h6.classList.add("animate__fadeInUp");
+              h6.classList.remove("none");
+            }, 1000);
+          }, 100);
+        }, 1500);
+
+        setTimeout(() => {
+          arrow.classList.remove("none");
+          arrow.classList.add("animate__fadeInUp");
+          setTimeout(() => {
+            arrow.classList.remove("animate__fadeInUp");
+            arrow.classList.add("animate__tada");
+            setTimeout(() => {
+              arrow.classList.remove("animate__tada");
+            }, 1000);
+          }, 1000);
+        }, 4000);
+      });
+
+      arrow.addEventListener("mouseover", () => {
+        arrow.classList.add("animate__shakeY");
+        setTimeout(() => {
+          arrow.classList.remove("animate__shakeY");
+        }, 1000);
+      });
+
+      arrow.addEventListener("click", () => {
+        article.scrollIntoView({ behavior: "smooth" });
+      });
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

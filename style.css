@@ -1,128 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
 body {
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
-  background-color: #0a0a0a;
+  font-family: "Montserrat", sans-serif !important;
+  background-color: #000000 !important;
+  color: white !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 body::-webkit-scrollbar {
   display: none;
 }
 
-#about {
-  height: 90vh;
-  outline: 1px dashed white;
-  outline-offset: -1vw;
-}
-
-main {
-  height: 100vh;
-  width: 100vw;
-}
-
-h1 {
-  font-size: 3rem;
-  color: white;
-}
-
-@media only screen and (max-width: 1000px) {
-  h1 {
-    font-size: 2rem;
-  }
-  h6 {
-    font-size: 1rem;
-  }
-}
-
-@media only screen and (max-width: 770px) {
-  h1 {
-    font-size: 1.2rem;
-  }
-  h6 {
-    font-size: 0.7rem;
-  }
-}
-
-h4 {
-  font-size: 2em;
-}
-
 h5 {
-  font-size: 1em;
+  line-height: 0.1 !important;
+  color: #27debf !important;
 }
 
-article {
-  height: 100vh;
-  width: 100vw;
-  font-family: "Roboto Mono", monospace;
+.d-none {
+  width: 0 !important;
+  height: 0 !important;
 }
 
-footer {
-  width: 100vw;
-  height: 10vh;
-  background-color: #090909;
+#name {
+  scale: 150%;
 }
 
-img:hover {
+#icon_container {
+  position: absolute;
+  top: 90%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  scale: 250%;
+}
+
+#icon {
+  color: hsl(170, 73%, 41%);
+}
+
+#icon:hover {
   cursor: pointer;
 }
 
-main {
-  color: white;
-}
-
-#arrow {
-  width: 5%;
-}
-
-.none {
-  visibility: hidden;
-}
-
-pre div {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-pre div:hover {
-  background: rgb(255, 224, 46);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 224, 46, 1) 0%,
-    rgba(154, 177, 254, 1) 100%
-  );
-  color: black;
-  cursor: text;
-}
-
-pre div:hover > #fldv {
-  background-color: #ffe02e;
-  color: black !important;
-}
-
-.project:hover {
-  transform: scale(105%);
-}
-
-pre {
-  font-size: 2em;
-}
-
-.cursornone {
-  cursor: context-menu !important;
-}
 @media only screen and (max-width: 1000px) {
-  #about {
-    width: 100vw !important;
-  }
-  pre {
-    font-size: 0.6em;
-  }
-  pre img {
-    width: 15%;
+  footer {
+    padding-top: 5rem;
   }
 }
 
-#line {
-  height: 95vh;
-  border: 1px solid white;
+@media only screen and (min-width: 1000px) {
+  footer {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    bottom: -15vh;
+    left: 50%;
+  }
+  #main_div {
+    padding-top: 5rem !important;
+  }
 }

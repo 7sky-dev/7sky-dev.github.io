@@ -10,8 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script>
-  // Motion follows the OS setting unless the visitor flips the toggle in the bar.
-  // Without JS nothing is hidden and the page reads top to bottom.
   (function () {
     var pref = null;
     try { pref = localStorage.getItem('motion'); } catch (e) {}
@@ -21,8 +19,6 @@
   })();
 </script>
 <style>
-  /* One terminal session in dark gold. Each command gets the whole screen:
-     it rises out of the middle, types itself, then flies past you as the next one arrives. */
   :root {
     --bg: #0A0806;
     --line: #2A2418;
@@ -36,22 +32,16 @@
   body { margin: 0; background: var(--bg); color: var(--text); font: 400 15px/1.7 "JetBrains Mono", ui-monospace, Consolas, monospace; -webkit-font-smoothing: antialiased; }
   ::selection { background: var(--gold); color: var(--bg); }
   :focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; }
-
   a { color: var(--gold); text-decoration: none; background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 1px; transition: background-size .25s ease, color .2s; }
   a:hover, a:focus-visible { color: var(--gold-hi); background-size: 100% 1px; }
-
   main { position: relative; z-index: 1; max-width: 46rem; margin: 0 auto; padding: 0 1.25rem 1.5rem; }
-
-  /* Background depth: a dot field that tilts into a floor as you leave the top */
   .field { position: fixed; inset: -50vh 0; z-index: 0; pointer-events: none;
     background: radial-gradient(rgba(232,200,115,.32) 1.2px, transparent 1.8px) 0 0 / 28px 28px;
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 40%, transparent 92%);
     mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 40%, transparent 92%);
-    transform-origin: 50% 60%; filter: blur(0.6px); opacity: .55;
+    transform-origin: 50% 60%; opacity: .55;
     transform: perspective(700px) rotateX(var(--fr, 0deg)) translate3d(0, var(--fy, 0), 0) scale(var(--fs, 1)); will-change: transform; }
-
-  /* Sticky prompt bar */
-  .bar { position: sticky; top: 0; z-index: 5; background: rgba(10,8,6,.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  .bar { position: sticky; top: 0; z-index: 5; background: rgba(10,8,6,.96);
     color: var(--muted); font-size: 13px; padding: 1.25rem 0 1rem; border-bottom: 1px solid var(--line);
     display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   .bar nav { display: flex; gap: 1.25rem; align-items: baseline; }
@@ -60,12 +50,9 @@
   .progress { position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--gold); transform-origin: left; transform: scaleX(var(--p, 0)); }
   .motion { font: inherit; color: var(--muted); background: none; border: 0; padding: 0; cursor: pointer; }
   .motion:hover { color: var(--gold); }
-
-  /* Stages: each section is pinned in the middle of the screen while its stage scrolls by */
   .stage { position: relative; }
   .stage > section { position: sticky; will-change: transform, opacity; }
   section { position: relative; padding: 1rem 0; }
-
   .cmd { margin: 0 0 1rem; white-space: nowrap; }
   .cmd::before { content: "❯ "; color: var(--gold); }
   .cmd .arg { color: var(--muted); }
@@ -73,12 +60,10 @@
   p { margin: 0 0 .75rem; }
   .muted { color: var(--muted); }
   .gold { color: var(--gold); }
-
   h1 { font: 700 clamp(2rem, 7vw, 3.25rem)/1.1 "JetBrains Mono", monospace; color: var(--gold-hi); margin: 0 0 1.25rem; letter-spacing: -.02em; }
   .kv { display: grid; grid-template-columns: 8rem 1fr; gap: .2rem 1rem; margin: 0; }
   .kv dt { color: var(--muted); }
   .kv dd { margin: 0; }
-
   table { width: 100%; border-collapse: collapse; }
   th { text-align: left; font-weight: 500; color: var(--muted); padding: 0 1rem .4rem 0; }
   td { padding: .25rem 1rem .25rem 0; vertical-align: top; }
@@ -86,44 +71,32 @@
   .open { color: var(--gold); }
   .wip { color: var(--muted); }
   .date { color: var(--muted); text-align: right; white-space: nowrap; }
-
   .project { position: relative; margin-bottom: 1.5rem; }
   .project::before { content: "❯"; position: absolute; left: -1.4rem; top: 0; color: var(--gold); opacity: 0; transform: translateX(-6px); transition: opacity .2s, transform .2s; }
   .project:hover::before, .project:focus-within::before { opacity: 1; transform: none; }
   .project h3 { font-size: inherit; margin: 0; font-weight: 700; }
   .project p { margin: .15rem 0; }
   .project .stack { color: var(--muted); font-size: 13px; }
-
   .copy { font: inherit; font-size: 13px; color: var(--muted); background: none; border: 1px solid var(--line); padding: 0 .5rem; margin-left: .75rem; cursor: pointer; transition: color .2s, border-color .2s; }
   .copy:hover, .copy[data-state="done"] { color: var(--gold); border-color: var(--gold); }
-
-  /* Output lines type out left to right in character-sized steps */
   .typed { clip-path: inset(0 var(--c, 0%) 0 0); }
-
-  /* Section name standing upright in the right margin, clear of the content */
   .ghost { position: fixed; z-index: 0; top: 50%; right: max(1.5rem, calc((100vw - 46rem) / 4 - 2.5rem)); pointer-events: none; user-select: none; opacity: 0;
     writing-mode: vertical-rl; font: 700 clamp(3rem, 6vw, 5.5rem)/1 "JetBrains Mono", monospace; letter-spacing: .02em; white-space: nowrap;
     color: rgba(201,162,74,.16);
     transform: translate3d(0, -50%, 0); will-change: transform, opacity; }
-
-  /* Scanner beam that wipes the hero away */
   .beam { position: fixed; z-index: 4; top: 0; left: 0; width: 100vw; height: 2px; pointer-events: none; opacity: 0;
     background: linear-gradient(90deg, transparent, var(--gold-hi) 30%, var(--gold-hi) 70%, transparent);
     box-shadow: 0 0 18px 3px rgba(232,200,115,.45), 0 -40px 60px -20px rgba(232,200,115,.12); }
-
   .prompt { margin: 2rem 0 0; }
   .cursor { display: inline-block; width: .6em; height: 1.15em; background: var(--gold); vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
   @keyframes blink { 50% { opacity: 0; } }
   footer { color: var(--muted); opacity: .5; font-size: 12px; text-align: center; padding: 2rem 0 0; }
-
-  /* Motion off: a plain, readable page */
   .still .stage { height: auto !important; margin: 3rem 0; }
   .still .stage > section { position: relative; top: 0 !important; transform: none !important; opacity: 1 !important; filter: none !important; clip-path: none !important; }
   .still .typed { clip-path: none; }
   .still .cmd .line { max-width: none; }
   .still .ghost, .still .beam { display: none; }
   .still .cursor { animation: none; }
-
   @media (max-width: 1000px) { .ghost { display: none; } }
   @media (max-width: 560px) {
     body { font-size: 14px; }
@@ -251,6 +224,9 @@
   var root = document.documentElement;
   function still() { return root.classList.contains('still'); }
   function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function easeIn(t) { return t * t * t; }
+  function easeInOut(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
   var glyphs = '01#$%&@*<>/\\{}[]=+?';
 
   var bar = document.querySelector('.bar'), field = document.querySelector('.field');
@@ -259,7 +235,6 @@
   beam.setAttribute('aria-hidden', 'true');
   document.body.appendChild(beam);
 
-  // Collect every stage with its command, output lines and background word
   var stages = [].slice.call(document.querySelectorAll('.stage')).map(function (el) {
     var sec = el.querySelector('section'), line = sec.querySelector('.cmd .line');
     var lines = [].slice.call(sec.querySelectorAll('h1, dt, dd, th, td, .project > *, section > p:not(.cmd)'));
@@ -273,157 +248,166 @@
       el: el, sec: sec, line: line, n: line.textContent.length, lines: lines, ghost: ghost,
       hero: el.classList.contains('hero'), last: el.classList.contains('last'),
       secret: [].slice.call(sec.querySelectorAll('.project h3 a, #certs td:nth-child(2)')),
-      top: 0, len: 1, pinned: true, decrypted: false
+      top: 0, len: 1, h: 0, docTop: 0, elH: 0, pinned: true, decrypted: false
     };
   });
   var hero = stages[0];
 
-  // Layout: pin each section in the middle of the space under the bar and give it
-  // one screen of scroll to play in; sections taller than the screen just scroll
   function layout() {
     var vh = innerHeight, barH = bar.offsetHeight, prev = null;
     stages.forEach(function (s) {
       s.el.style.height = ''; s.el.style.marginTop = '';
       s.h = s.sec.offsetHeight;
       s.pinned = !still() && s.h < vh - barH - 24;
-      if (!s.pinned) { s.sec.style.top = ''; s.sec.style.position = 'relative'; prev = null; return; }
+      if (!s.pinned) {
+        s.sec.style.top = ''; s.sec.style.position = 'relative'; prev = null;
+        s.docTop = s.el.getBoundingClientRect().top + scrollY;
+        s.elH = s.el.offsetHeight;
+        return;
+      }
       s.sec.style.position = '';
       s.top = barH + (vh - barH - s.h) / 2;
       s.sec.style.top = s.top + 'px';
       s.len = vh * (s.hero ? .8 : s.last ? .6 : 1);
-      // Pull each stage up so its section takes over the middle of the screen the moment
-      // the previous one leaves: no dead scroll between them
       if (prev) s.el.style.marginTop = -prev.h + 'px';
-      // The first stage is already pinned at load; give it room for that head start
       var docTop = s.el.getBoundingClientRect().top + scrollY;
       var head = Math.max(0, s.top - docTop);
-      s.el.style.height = (head + s.h + s.len) + 'px';
+      s.elH = head + s.h + s.len;
+      s.el.style.height = s.elH + 'px';
+      s.docTop = docTop;
       s.pinStart = Math.max(0, docTop - s.top);
       prev = s;
     });
+    maxScroll = root.scrollHeight - vh;
   }
+  var maxScroll = 0;
 
-  // Hero types itself once on load
-  var heroStart = performance.now(), heroTyped = false;
+  var heroStart = performance.now();
   function heroIntro(now) {
+    if (still()) return;
     var t = now - heroStart;
-    hero.line.style.setProperty('--w', Math.min(hero.n, Math.floor((t - 250) / 32)) + 'ch');
+    hero.line.style.setProperty('--w', Math.max(0, Math.min(hero.n, Math.floor((t - 250) / 32))) + 'ch');
     var after = 250 + hero.n * 32 + 150;
     hero.lines.forEach(function (l, i) {
-      var k = clamp((t - after - i * 110) / 380);
-      l.style.setProperty('--c', ((1 - Math.round(k * 24) / 24) * 100) + '%');
+      var k = easeOut(clamp((t - after - i * 90) / 520));
+      l.style.setProperty('--c', ((1 - k) * 100).toFixed(2) + '%');
     });
-    if (t < after + hero.lines.length * 110 + 400) requestAnimationFrame(heroIntro);
-    else heroTyped = true;
+    if (t < after + hero.lines.length * 90 + 560) requestAnimationFrame(heroIntro);
   }
 
   function reveal(s, k) {
     s.line.style.setProperty('--w', Math.round(clamp(k / .25) * s.n) + 'ch');
     var count = s.lines.length;
     s.lines.forEach(function (l, i) {
-      var start = .2 + (i / count) * .55;
-      var o = clamp((k - start) / .2);
-      l.style.setProperty('--c', ((1 - Math.round(o * 24) / 24) * 100) + '%');
+      var start = .18 + (i / count) * .55;
+      var o = easeOut(clamp((k - start) / .25));
+      l.style.setProperty('--c', ((1 - o) * 100).toFixed(2) + '%');
     });
   }
 
   function clearMotion() {
     stages.forEach(function (s) {
-      s.sec.style.transform = s.sec.style.opacity = s.sec.style.filter = s.sec.style.clipPath = '';
+      s.sec.style.transform = s.sec.style.opacity = s.sec.style.clipPath = '';
       s.line.style.removeProperty('--w');
       s.lines.forEach(function (l) { l.style.removeProperty('--c'); });
+      s.ghost.style.opacity = 0;
     });
     beam.style.opacity = 0;
   }
 
-  var ticking = false;
-  function update() {
-    ticking = false;
-    var y = scrollY, vh = innerHeight, vw = innerWidth;
-    var max = root.scrollHeight - vh;
-    bar.style.setProperty('--p', max > 0 ? Math.min(y / max, 1) : 0);
-    spy();
+  var target = scrollY, cur = scrollY, running = false;
+  function loop() {
+    var d = target - cur;
+    cur = Math.abs(d) < .3 ? target : cur + d * .16;
+    update(cur);
+    if (cur !== target) requestAnimationFrame(loop);
+    else running = false;
+  }
+  function kick() {
+    target = scrollY;
+    if (still()) { cur = target; update(cur); return; }
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }
+
+  function update(y) {
+    var vh = innerHeight;
+    bar.style.setProperty('--p', maxScroll > 0 ? Math.min(y / maxScroll, 1) : 0);
+    spy(scrollY);
     if (still()) return;
-    beam.style.opacity = 0;
 
-    // Floor tilt
-    var t = Math.min(y / vh, 1);
-    field.style.setProperty('--fr', (t * 58) + 'deg');
-    field.style.setProperty('--fs', 1 + t * .7);
-    field.style.setProperty('--fy', ((-(y * .25) % 28) - t * 40) + 'px');
-    // Flat dots at the top read brighter than the tilted floor, so fade them up as it tilts
-    field.style.opacity = .55 + t * .45;
+    var t = easeInOut(Math.min(y / vh, 1));
+    field.style.setProperty('--fr', (t * 58).toFixed(2) + 'deg');
+    field.style.setProperty('--fs', (1 + t * .7).toFixed(4));
+    field.style.setProperty('--fy', ((-(y * .25) % 28) - t * 40).toFixed(2) + 'px');
+    field.style.opacity = (.55 + t * .45).toFixed(3);
 
-    stages.forEach(function (s) { s.ghost.style.opacity = 0; });
+    var beamOn = false;
     stages.forEach(function (s) {
-      var r = s.el.getBoundingClientRect();
-      if (r.bottom < -vh || r.top > vh * 2) return;
-      if (!s.pinned) { reveal(s, 1); return; }
+      var top = s.docTop - y, bottom = top + s.elH;
+      if (bottom < -vh || top > vh * 2) { s.ghost.style.opacity = 0; return; }
+      if (!s.pinned) { s.ghost.style.opacity = 0; reveal(s, 1); return; }
       var p = clamp((y - s.pinStart) / s.len);
 
       if (s.hero) {
-        // Scanner sweeps down and erases the record
-        var scan = clamp((p - .1) / .8), h = s.sec.offsetHeight;
-        var beamY = scan * (h + 40) - 20;
-        s.sec.style.clipPath = scan > 0 ? 'inset(' + beamY + 'px -100vw -100vh -100vw)' : '';
-        beam.style.transform = 'translate3d(0,' + (s.sec.getBoundingClientRect().top + beamY) + 'px,0)';
-        beam.style.opacity = scan > 0 && scan < 1 ? 1 : 0;
+        var scan = easeInOut(clamp((p - .1) / .75));
+        var beamY = scan * (s.h + 40) - 20;
+        s.sec.style.clipPath = scan > 0 ? 'inset(' + beamY.toFixed(1) + 'px -100vw -100vh -100vw)' : '';
+        if (scan > 0 && scan < 1) {
+          beamOn = true;
+          beam.style.transform = 'translate3d(0,' + (s.top + beamY).toFixed(1) + 'px,0)';
+        }
         ghostAt(s, 1, scan);
         return;
       }
 
-      // The section name slides into the margin and leaves together with the content
-      var exit = s.last ? 0 : clamp((p - .85) / .15);
-      ghostAt(s, clamp(p / .12), exit);
-      var enter = clamp((p - .08) / .12);
-      var ty = (1 - enter) * 60 - exit * 80;
-      var sc = .82 + enter * .18 + exit * .35;
-      s.sec.style.transform = 'translate3d(0,' + ty + 'px,0) scale(' + sc + ')';
-      s.sec.style.opacity = enter * (1 - exit);
-      s.sec.style.filter = 'blur(' + ((1 - enter) * 10 + exit * 8).toFixed(1) + 'px)';
-      reveal(s, clamp((p - .12) / .28));
+      var exit = s.last ? 0 : easeIn(clamp((p - .76) / .16));
+      var enter = easeOut(clamp((p - .04) / .2));
+      ghostAt(s, easeOut(clamp(p / .16)), exit);
+      var ty = (1 - enter) * 70 - exit * 90;
+      var sc = .9 + enter * .1 + exit * .12;
+      s.sec.style.transform = 'translate3d(0,' + ty.toFixed(2) + 'px,0) scale(' + sc.toFixed(4) + ')';
+      s.sec.style.opacity = (enter * (1 - exit)).toFixed(3);
+      reveal(s, clamp((p - .1) / .3));
       if (!s.decrypted && p > .3) { s.decrypted = true; s.secret.forEach(decrypt); }
     });
+    beam.style.opacity = beamOn ? 1 : 0;
   }
 
-  // Section name: fades up into place, holds, then fades on upward
   function ghostAt(s, enter, exit) {
-    s.ghost.style.opacity = enter * (1 - exit);
-    s.ghost.style.transform = 'translate3d(0, calc(-50% + ' + ((1 - enter) * 40 - exit * 40) + 'px), 0)';
+    s.ghost.style.opacity = (enter * (1 - exit)).toFixed(3);
+    s.ghost.style.transform = 'translate3d(0, calc(-50% + ' + ((1 - enter) * 40 - exit * 40).toFixed(2) + 'px), 0)';
   }
 
-  // Nav: jump to the moment a stage is fully on screen, and light up the one you're in
   var links = [].slice.call(document.querySelectorAll('.bar nav a'));
   links.forEach(function (a) {
     a.addEventListener('click', function (e) {
       var s = stages.filter(function (x) { return '#' + x.el.id === a.getAttribute('href'); })[0];
       if (!s || still() || !s.pinned) return;
       e.preventDefault();
-      var docTop = s.el.getBoundingClientRect().top + scrollY;
-      scrollTo({ top: docTop - s.top + s.len * .55, behavior: 'smooth' });
+      scrollTo({ top: s.docTop - s.top + s.len * .5, behavior: 'smooth' });
       history.replaceState(null, '', a.getAttribute('href'));
     });
   });
-  function spy() {
-    var current = null, mid = innerHeight / 2;
+  var lastCurrent;
+  function spy(y) {
+    var current = null, mid = y + innerHeight / 2;
     stages.forEach(function (s) {
-      var r = s.el.getBoundingClientRect();
-      if (s.el.id && r.top < mid && r.bottom > mid) current = '#' + s.el.id;
+      if (s.el.id && s.docTop < mid && s.docTop + s.elH > mid) current = '#' + s.el.id;
     });
+    if (current === lastCurrent) return;
+    lastCurrent = current;
     links.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === current ? 'true' : 'false'); });
   }
 
-  // Decrypt effect: names scramble, then resolve left to right
   function decrypt(el) {
-    var text = el.textContent, start = performance.now(), dur = 600;
+    var text = el.textContent, start = performance.now(), dur = 700;
     (function frame(now) {
-      var k = Math.min(1, (now - start) / dur), n = Math.floor(k * text.length);
+      var k = easeOut(Math.min(1, (now - start) / dur)), n = Math.floor(k * text.length);
       el.textContent = text.slice(0, n) + text.slice(n).replace(/\S/g, function () { return glyphs[Math.random() * glyphs.length | 0]; });
       if (k < 1) requestAnimationFrame(frame); else el.textContent = text;
     })(start);
   }
 
-  // Motion toggle: overrides the OS setting and remembers the choice
   var toggle = document.querySelector('.motion');
   function syncToggle() {
     toggle.setAttribute('aria-pressed', String(!still()));
@@ -435,12 +419,12 @@
     syncToggle();
     if (still()) clearMotion();
     layout();
-    if (!still()) { heroTyped = true; reveal(hero, 1); }
-    update();
+    if (!still()) reveal(hero, 1);
+    target = cur = scrollY;
+    update(cur);
   });
   syncToggle();
 
-  // Copy email with visible confirmation
   document.querySelectorAll('.copy').forEach(function (btn) {
     btn.addEventListener('click', function () {
       navigator.clipboard.writeText(btn.dataset.copy).then(function () {
@@ -451,20 +435,23 @@
     });
   });
 
-  addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  addEventListener('resize', function () { layout(); update(); });
-  if (document.fonts) document.fonts.ready.then(function () { layout(); update(); });
+  addEventListener('scroll', kick, { passive: true });
+  var resizeT;
+  addEventListener('resize', function () {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(function () { layout(); target = cur = scrollY; update(cur); }, 120);
+  });
+  if (document.fonts) document.fonts.ready.then(function () { layout(); update(cur); });
 
   layout();
   if (still()) clearMotion();
   else {
-    // Start hidden, then type the hero
     stages.forEach(function (s) { if (s !== hero) reveal(s, 0); });
     hero.line.style.setProperty('--w', '0ch');
     hero.lines.forEach(function (l) { l.style.setProperty('--c', '100%'); });
     requestAnimationFrame(heroIntro);
   }
-  update();
+  update(cur);
 })();
 </script>
 </body>
